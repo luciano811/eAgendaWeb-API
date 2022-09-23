@@ -22,20 +22,23 @@ namespace eAgenda.Webapi.Controllers
         private readonly ServicoTarefa servicoTarefa;
         private IMapper mapeadorTarefas;
 
-        public TarefasController()
+        public TarefasController(IMapper mapeadorTarefas, ServicoTarefa servicoTarefa)
         {
-            var config = new ConfiguracaoAplicacaoeAgenda();
+            this.mapeadorTarefas = mapeadorTarefas;
+            this.servicoTarefa = servicoTarefa;
 
-            var eAgendaDbContext = new eAgendaDbContext(config.ConnectionStrings);
-            var repositorioTarefa = new RepositorioTarefaOrm(eAgendaDbContext);
-            servicoTarefa = new ServicoTarefa(repositorioTarefa, eAgendaDbContext);
+            //var config = new ConfiguracaoAplicacaoeAgenda();
 
-            var autoMapperConfig = new MapperConfiguration(config =>
-            {
-                config.AddProfile<TarefaProfile>();
-            });
+            //var eAgendaDbContext = new eAgendaDbContext(config.ConnectionStrings);
+            //var repositorioTarefa = new RepositorioTarefaOrm(eAgendaDbContext);
+            //servicoTarefa = new ServicoTarefa(repositorioTarefa, eAgendaDbContext);
 
-            mapeadorTarefas = autoMapperConfig.CreateMapper();
+            //var autoMapperConfig = new MapperConfiguration(config =>
+            //{
+            //    config.AddProfile<TarefaProfile>();
+            //});
+
+            //mapeadorTarefas = autoMapperConfig.CreateMapper();
         }
 
         [HttpGet]
