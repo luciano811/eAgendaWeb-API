@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eAgenda.Webapi.Config.AutoMapperConfig;
+using eAgenda.Webapi.Filters;
 
 namespace eAgenda.Webapi
 {
@@ -48,7 +49,13 @@ namespace eAgenda.Webapi
             services.AddScoped<IContextoPersistencia, eAgendaDbContext>();
             services.AddScoped<IRepositorioTarefa, RepositorioTarefaOrm>();
             services.AddTransient<ServicoTarefa>();
-            services.AddControllers();
+
+            services.AddControllers(config =>
+            {
+                config.Filters.Add(new ValidarViewModelActionFilter());
+            });
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eAgenda.Webapi", Version = "v1" });

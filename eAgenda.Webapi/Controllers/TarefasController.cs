@@ -20,20 +20,7 @@ namespace eAgenda.Webapi.Controllers
         public TarefasController(IMapper mapeadorTarefas, ServicoTarefa servicoTarefa)
         {
             this.mapeadorTarefas = mapeadorTarefas;
-            this.servicoTarefa = servicoTarefa;
-
-            //var config = new ConfiguracaoAplicacaoeAgenda();
-
-            //var eAgendaDbContext = new eAgendaDbContext(config.ConnectionStrings);
-            //var repositorioTarefa = new RepositorioTarefaOrm(eAgendaDbContext);
-            //servicoTarefa = new ServicoTarefa(repositorioTarefa, eAgendaDbContext);
-
-            //var autoMapperConfig = new MapperConfiguration(config =>
-            //{
-            //    config.AddProfile<TarefaProfile>();
-            //});
-
-            //mapeadorTarefas = autoMapperConfig.CreateMapper();
+            this.servicoTarefa = servicoTarefa;            
         }
 
         [HttpGet] //Action, Ação do Controlador, Endpoint
@@ -69,20 +56,7 @@ namespace eAgenda.Webapi.Controllers
 
         [HttpPost]
         public ActionResult<FormsTarefaViewModel> Inserir(InserirTarefaViewModel tarefaVM)
-        {
-            var listaErros = ModelState.Values
-            .SelectMany(x => x.Errors)
-            .Select(x => x.ErrorMessage);
-
-            if (listaErros.Any())
-            {
-                return BadRequest(new
-                {
-                    sucesso = false,
-                    erros = listaErros.ToList()
-                });
-            }
-            
+        {                      
             var tarefa = mapeadorTarefas.Map<Tarefa>(tarefaVM);
             var tarefaResult = servicoTarefa.Inserir(tarefa);
 
@@ -99,20 +73,7 @@ namespace eAgenda.Webapi.Controllers
         [HttpPut("{id:guid}")]
 
         public ActionResult<FormsTarefaViewModel> Editar(Guid id, EditarTarefaViewModel tarefaVM)
-        {
-            var listaErros = ModelState.Values
-            .SelectMany(x => x.Errors)
-            .Select(x => x.ErrorMessage);
-
-            if (listaErros.Any())
-            {
-                return BadRequest(new
-                {
-                    sucesso = false,
-                    erros = listaErros.ToList()
-                });
-            }
-
+        {            
             var tarefaResult = servicoTarefa.SelecionarPorId(id);
             if (tarefaResult.IsFailed && RegistroNaoEncontrado(tarefaResult))
                 return NotFound(tarefaResult);
