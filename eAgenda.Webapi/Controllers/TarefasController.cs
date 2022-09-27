@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using eAgenda.Aplicacao.ModuloTarefa;
 using eAgenda.Dominio.ModuloTarefa;
+using eAgenda.Webapi.Controllers.Compartilhado;
 using eAgenda.Webapi.ViewModels;
+using eAgenda.Webapi.ViewModels.ModuloTarefa;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -19,6 +19,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using eAgenda.Webapi.Config.AutoMapperConfig;
 using eAgenda.Webapi.Filters;
+using eAgenda.Aplicacao.ModuloContato;
+using eAgenda.Infra.Orm.ModuloContato;
+using eAgenda.Dominio.ModuloContato;
 
 namespace eAgenda.Webapi
 {
@@ -43,12 +46,15 @@ namespace eAgenda.Webapi
             services.AddAutoMapper(config =>
             {
                  config.AddProfile <TarefaProfile> ();
+                 config.AddProfile <ContatoProfile> ();
             });
 
             services.AddSingleton((x) => new ConfiguracaoAplicacaoeAgenda().ConnectionStrings);
             services.AddScoped<IContextoPersistencia, eAgendaDbContext>();
             services.AddScoped<IRepositorioTarefa, RepositorioTarefaOrm>();
+            services.AddScoped<IRepositorioContato, RepositorioContatoOrm>();
             services.AddTransient<ServicoTarefa>();
+            services.AddTransient<ServicoContato>();
 
             services.AddControllers(config =>
             {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-namespace eAgenda.Webapi.Controllers
+namespace eAgenda.Webapi.Controllers.Compartilhado
 {
     [ApiController]
     public abstract class eAgendaControllerBase : ControllerBase
