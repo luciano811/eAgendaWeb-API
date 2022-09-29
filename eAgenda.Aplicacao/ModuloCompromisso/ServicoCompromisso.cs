@@ -81,6 +81,16 @@ namespace eAgenda.Aplicacao.ModuloCompromisso
             return Result.Ok(compromisso);
         }
 
+        public Result Excluir(Guid id)
+        {
+            var compromissoResult = SelecionarPorId(id);
+
+            if (compromissoResult.IsSuccess)
+                return Excluir(compromissoResult.Value);
+
+            return Result.Fail(compromissoResult.Errors);
+        }
+
         public Result Excluir(Compromisso compromisso)
         {
             Log.Logger.Debug("Tentando excluir compromisso... {@c}", compromisso);
@@ -117,7 +127,7 @@ namespace eAgenda.Aplicacao.ModuloCompromisso
 
                 Log.Logger.Information("Compromissos selecionados com sucesso");
 
-                return Result.Ok(compromissos);
+                 return Result.Ok(compromissos);
             }
             catch (Exception ex)
             {

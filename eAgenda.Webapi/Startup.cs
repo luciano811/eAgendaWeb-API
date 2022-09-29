@@ -22,6 +22,10 @@ using eAgenda.Webapi.Filters;
 using eAgenda.Aplicacao.ModuloContato;
 using eAgenda.Infra.Orm.ModuloContato;
 using eAgenda.Dominio.ModuloContato;
+using eAgenda.Aplicacao.ModuloCompromisso;
+using eAgenda.Dominio.ModuloCompromisso;
+using eAgenda.Infra.Orm.ModuloCompromisso;
+using Microsoft.OpenApi.Any;
 
 namespace eAgenda.Webapi
 {
@@ -47,14 +51,17 @@ namespace eAgenda.Webapi
             {
                  config.AddProfile <TarefaProfile> ();
                  config.AddProfile <ContatoProfile> ();
+                 config.AddProfile <CompromissoProfile> ();
             });
 
             services.AddSingleton((x) => new ConfiguracaoAplicacaoeAgenda().ConnectionStrings);
             services.AddScoped<IContextoPersistencia, eAgendaDbContext>();
             services.AddScoped<IRepositorioTarefa, RepositorioTarefaOrm>();
             services.AddScoped<IRepositorioContato, RepositorioContatoOrm>();
+            services.AddScoped<IRepositorioCompromisso, RepositorioCompromissoOrm>();
             services.AddTransient<ServicoTarefa>();
             services.AddTransient<ServicoContato>();
+            services.AddTransient<ServicoCompromisso>();
 
             services.AddControllers(config =>
             {
@@ -65,6 +72,11 @@ namespace eAgenda.Webapi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eAgenda.Webapi", Version = "v1" });
+                c.MapType<TimeSpan>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Example = new OpenApiString("00:00:00")
+                });
             });
         }
 

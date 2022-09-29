@@ -55,7 +55,7 @@ namespace eAgenda.Dominio.ModuloCompromisso
         public DateTime Data { get { return _date.Date; } set { _date = value; } }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraTermino { get; set; }
-        public Contato Contato { get; set; }
+        public Contato? Contato { get; set; }
         public Guid? ContatoId { get; set; }
         public override void Atualizar(Compromisso registro)
         {
