@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eAgenda.Webapi.Config.AutoMapperConfig;
 using eAgenda.Webapi.Filters;
 using eAgenda.Aplicacao.ModuloContato;
 using eAgenda.Infra.Orm.ModuloContato;
@@ -26,6 +25,13 @@ using eAgenda.Aplicacao.ModuloCompromisso;
 using eAgenda.Dominio.ModuloCompromisso;
 using eAgenda.Infra.Orm.ModuloCompromisso;
 using Microsoft.OpenApi.Any;
+using eAgenda.Aplicacao.ModuloDespesa;
+using eAgenda.Dominio.ModuloDespesa;
+using eAgenda.Infra.Orm.ModuloDespesa;
+using eAgenda.Webapi.Config.AutoMapperConfig.ModuloCompromisso;
+using eAgenda.Webapi.Config.AutoMapperConfig.ModuloContato;
+using eAgenda.Webapi.Config.AutoMapperConfig.ModuloDespesa;
+using eAgenda.Webapi.Config.AutoMapperConfig.ModuloTarefa;
 
 namespace eAgenda.Webapi
 {
@@ -52,6 +58,7 @@ namespace eAgenda.Webapi
                  config.AddProfile <TarefaProfile> ();
                  config.AddProfile <ContatoProfile> ();
                  config.AddProfile <CompromissoProfile> ();
+                 config.AddProfile <DespesaProfile> ();
             });
 
             services.AddSingleton((x) => new ConfiguracaoAplicacaoeAgenda().ConnectionStrings);
@@ -59,9 +66,11 @@ namespace eAgenda.Webapi
             services.AddScoped<IRepositorioTarefa, RepositorioTarefaOrm>();
             services.AddScoped<IRepositorioContato, RepositorioContatoOrm>();
             services.AddScoped<IRepositorioCompromisso, RepositorioCompromissoOrm>();
+            services.AddScoped<IRepositorioDespesa, RepositorioDespesaOrm>();
             services.AddTransient<ServicoTarefa>();
             services.AddTransient<ServicoContato>();
             services.AddTransient<ServicoCompromisso>();
+            services.AddTransient<ServicoDespesa>();
 
             services.AddControllers(config =>
             {

@@ -3,7 +3,7 @@ using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.ModuloContato;
 using eAgenda.Webapi.ViewModels.ModuloContato;
 
-namespace eAgenda.Webapi.Config.AutoMapperConfig
+namespace eAgenda.Webapi.Config.AutoMapperConfig.ModuloContato
 {
     public class ContatoProfile : Profile
     {

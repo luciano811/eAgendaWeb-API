@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\ModuloDespesa\" />
+    <Folder Include="Config\AutoMapperConfig\ModuloCategoria\" />
   </ItemGroup>
 
 </Project>

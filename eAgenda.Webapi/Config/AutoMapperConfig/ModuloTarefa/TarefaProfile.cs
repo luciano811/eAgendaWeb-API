@@ -4,7 +4,7 @@ using eAgenda.Dominio.ModuloTarefa;
 using eAgenda.Webapi.ViewModels;
 using eAgenda.Webapi.ViewModels.ModuloTarefa;
 
-namespace eAgenda.Webapi.Config.AutoMapperConfig
+namespace eAgenda.Webapi.Config.AutoMapperConfig.ModuloTarefa
 {
     public class TarefaProfile : Profile
     {
