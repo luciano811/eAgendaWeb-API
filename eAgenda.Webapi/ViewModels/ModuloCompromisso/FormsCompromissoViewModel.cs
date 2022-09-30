@@ -29,14 +29,13 @@ namespace eAgenda.Webapi.ViewModels.ModuloCompromisso
 
 
         [Required(ErrorMessage = "O '{0}' é obrigatório")]
-        public Guid ContatoId { get; set; }
-
-        [Required(ErrorMessage = "O '{0}' é obrigatório")]
         public TimeSpan HoraInicio { get; set; }
 
         [Required(ErrorMessage = "O '{0}' é obrigatório")]
         public TimeSpan HoraTermino { get; set; }
 
+        [Required(ErrorMessage = "O '{0}' é obrigatório")]
+        public Contato Contato { get; set; }
 
 
     }
