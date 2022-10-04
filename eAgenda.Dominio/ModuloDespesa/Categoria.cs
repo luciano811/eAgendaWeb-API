@@ -1,6 +1,7 @@
 ﻿using eAgenda.Dominio.Compartilhado;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace eAgenda.Dominio.ModuloDespesa
 {
@@ -13,6 +14,7 @@ namespace eAgenda.Dominio.ModuloDespesa
 
         public string Titulo { get; set; }
 
+        [JsonIgnore]
         public List<Despesa> Despesas { get; set; }
 
         public override void Atualizar(Categoria registro)
