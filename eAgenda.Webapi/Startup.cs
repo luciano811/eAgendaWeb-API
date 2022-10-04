@@ -32,6 +32,7 @@ using eAgenda.Webapi.Config.AutoMapperConfig.ModuloCompromisso;
 using eAgenda.Webapi.Config.AutoMapperConfig.ModuloContato;
 using eAgenda.Webapi.Config.AutoMapperConfig.ModuloDespesa;
 using eAgenda.Webapi.Config.AutoMapperConfig.ModuloTarefa;
+using eAgenda.Webapi.Config.AutoMapperConfig.ModuloCategoria;
 
 namespace eAgenda.Webapi
 {
@@ -59,6 +60,7 @@ namespace eAgenda.Webapi
                  config.AddProfile <ContatoProfile> ();
                  config.AddProfile <CompromissoProfile> ();
                  config.AddProfile <DespesaProfile> ();
+                 config.AddProfile <CategoriaProfile> ();
             });
 
             services.AddSingleton((x) => new ConfiguracaoAplicacaoeAgenda().ConnectionStrings);
@@ -67,10 +69,12 @@ namespace eAgenda.Webapi
             services.AddScoped<IRepositorioContato, RepositorioContatoOrm>();
             services.AddScoped<IRepositorioCompromisso, RepositorioCompromissoOrm>();
             services.AddScoped<IRepositorioDespesa, RepositorioDespesaOrm>();
+            services.AddScoped<IRepositorioCategoria, RepositorioCategoriaOrm>();
             services.AddTransient<ServicoTarefa>();
             services.AddTransient<ServicoContato>();
             services.AddTransient<ServicoCompromisso>();
             services.AddTransient<ServicoDespesa>();
+            services.AddTransient<ServicoCategoria>();
 
             services.AddControllers(config =>
             {

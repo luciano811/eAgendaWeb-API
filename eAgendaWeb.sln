@@ -52,7 +52,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgenda.Infra.Logging", "eA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgenda.Infra.Orm.Tests", "eAgenda.Infra.Orm.Tests\eAgenda.Infra.Orm.Tests.csproj", "{B943060D-BADD-4B7D-B97F-48B88694DE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Webapi", "eAgenda.Webapi\eAgenda.Webapi.csproj", "{87386614-ADC5-4829-92DB-9E7259C192D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgenda.Webapi", "eAgenda.Webapi\eAgenda.Webapi.csproj", "{87386614-ADC5-4829-92DB-9E7259C192D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
