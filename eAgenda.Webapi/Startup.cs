@@ -33,6 +33,13 @@ using eAgenda.Webapi.Config.AutoMapperConfig.ModuloContato;
 using eAgenda.Webapi.Config.AutoMapperConfig.ModuloDespesa;
 using eAgenda.Webapi.Config.AutoMapperConfig.ModuloTarefa;
 using eAgenda.Webapi.Config.AutoMapperConfig.ModuloCategoria;
+using eAgenda.Webapi.Config.AutoMapperConfig;
+using Microsoft.AspNetCore.Identity;
+using eAgenda.Dominio.ModuloAutenticacao;
+using eAgenda.Aplicacao.ModuloAutenticacao;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eAgenda.Webapi
 {
@@ -61,9 +68,20 @@ namespace eAgenda.Webapi
                  config.AddProfile <CompromissoProfile> ();
                  config.AddProfile <DespesaProfile> ();
                  config.AddProfile <CategoriaProfile> ();
+                 config.AddProfile<UsuarioProfile>();
             });
 
             services.AddSingleton((x) => new ConfiguracaoAplicacaoeAgenda().ConnectionStrings);
+
+            services.AddScoped<eAgendaDbContext>();
+
+            services.AddIdentity<Usuario, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<eAgendaDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<UserManager<Usuario>>();
+            services.AddTransient<SignInManager<Usuario>>();
+
             services.AddScoped<IContextoPersistencia, eAgendaDbContext>();
             services.AddScoped<IRepositorioTarefa, RepositorioTarefaOrm>();
             services.AddScoped<IRepositorioContato, RepositorioContatoOrm>();
@@ -75,6 +93,7 @@ namespace eAgenda.Webapi
             services.AddTransient<ServicoCompromisso>();
             services.AddTransient<ServicoDespesa>();
             services.AddTransient<ServicoCategoria>();
+            services.AddTransient<ServicoAutenticacao>();
 
             services.AddControllers(config =>
             {
@@ -89,6 +108,27 @@ namespace eAgenda.Webapi
                 {
                     Type = "string",
                     Example = new OpenApiString("00:00:00")
+                });
+
+                var key = Encoding.ASCII.GetBytes("SegredoSuperSecretoDoeAgenda");
+
+                services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                }).AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidAudience = "http://localhost",
+                        ValidIssuer = "eAgenda"
+                    };
                 });
             });
         }
@@ -108,6 +148,8 @@ namespace eAgenda.Webapi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
