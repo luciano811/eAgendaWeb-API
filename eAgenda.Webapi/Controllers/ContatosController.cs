@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using eAgenda.Aplicacao.ModuloContato;
 using eAgenda.Dominio.ModuloContato;
-using eAgenda.Webapi.Controllers.Compartilhado;
 using eAgenda.Webapi.ViewModels.ModuloContato;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using eAgenda.Aplicacao.ModuloDespesa;
 using eAgenda.Dominio.ModuloDespesa;
-using eAgenda.Webapi.Controllers.Compartilhado;
 using eAgenda.Webapi.ViewModels.ModuloCategoria;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;

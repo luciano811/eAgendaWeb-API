@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using eAgenda.Aplicacao.ModuloTarefa;
 using eAgenda.Dominio.ModuloTarefa;
-using eAgenda.Webapi.Controllers.Compartilhado;
 using eAgenda.Webapi.ViewModels;
 using eAgenda.Webapi.ViewModels.ModuloTarefa;
 using FluentResults;
@@ -28,7 +27,7 @@ namespace eAgenda.Webapi.Controllers
         [HttpGet] //Action, Ação do Controlador, Endpoint
         public ActionResult<List<ListarTarefaViewModel>> SelecionarTodos()
         {
-            var tarefaResult = servicoTarefa.SelecionarTodos(StatusTarefaEnum.Todos);
+            var tarefaResult = servicoTarefa.SelecionarTodos(StatusTarefaEnum.Todos, UsuarioLogado.Id);
             if (tarefaResult.IsFailed)
                 return InternalError(tarefaResult);
             return Ok(new
@@ -60,6 +59,7 @@ namespace eAgenda.Webapi.Controllers
         public ActionResult<FormsTarefaViewModel> Inserir(InserirTarefaViewModel tarefaVM)
         {                      
             var tarefa = mapeadorTarefas.Map<Tarefa>(tarefaVM);
+            tarefa.UsuarioId = UsuarioLogado.Id;
             var tarefaResult = servicoTarefa.Inserir(tarefa);
 
             if (tarefaResult.IsFailed)
