@@ -4,6 +4,7 @@ using FluentResults;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using Taikandi;
 
 namespace eAgenda.Aplicacao.ModuloTarefa
 {
@@ -30,6 +31,7 @@ namespace eAgenda.Aplicacao.ModuloTarefa
 
             try
             {
+                tarefa.Id = SequentialGuid.NewGuid();
 
                 repositorioTarefa.Inserir(tarefa);
 

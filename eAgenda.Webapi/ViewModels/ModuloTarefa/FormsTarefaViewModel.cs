@@ -8,7 +8,6 @@ namespace eAgenda.Webapi.ViewModels.ModuloTarefa
     public class FormsTarefaViewModel
     {
 
-        [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O '{0}' é obrigatório")]
