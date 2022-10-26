@@ -4,6 +4,7 @@ using eAgenda.Dominio.ModuloDespesa;
 using eAgenda.Webapi.ViewModels;
 using eAgenda.Webapi.ViewModels.ModuloDespesa;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace eAgenda.Webapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class DespesasController : eAgendaControllerBase
     {
         private readonly ServicoDespesa servicoDespesa;

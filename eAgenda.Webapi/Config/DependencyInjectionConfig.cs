@@ -6,6 +6,9 @@ using eAgenda.Infra.Orm.ModuloTarefa;
 using eAgenda.Infra.Orm;
 using Microsoft.Extensions.DependencyInjection;
 using eAgenda.Infra.Configs;
+using eAgenda.Aplicacao.ModuloContato;
+using eAgenda.Infra.Orm.ModuloContato;
+using eAgenda.Dominio.ModuloContato;
 
 namespace eAgenda.Webapi.Config
 {
@@ -20,8 +23,10 @@ namespace eAgenda.Webapi.Config
             services.AddScoped<IContextoPersistencia, eAgendaDbContext>();
 
             services.AddScoped<IRepositorioTarefa, RepositorioTarefaOrm>();
+            services.AddScoped<IRepositorioContato, RepositorioContatoOrm>();
 
             services.AddTransient<ServicoTarefa>();
+            services.AddTransient<ServicoContato>();
             services.AddTransient<ServicoAutenticacao>();
         }
     }
